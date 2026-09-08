@@ -1,0 +1,50 @@
+<div class="  border border-gray-200 rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition flex flex-col sm:flex-row items-center justify-between gap-6 XcID">
+    <!-- Image & Details Container -->
+    <div class="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
+      <img 
+        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" 
+        alt="Noise-Canceling Headphones" 
+        class="w-full sm:w-28 h-28 object-cover rounded-lg bg-gray-100 flex-shrink-0"
+      />
+      <div class="space-y-1.5 text-center sm:text-left w-full">
+        <div class="flex items-center justify-center sm:justify-start gap-2">
+          <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">XID</span>
+          <span class="text-xs text-emerald-600 font-medium flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> In Stock
+          </span>
+        </div>
+        <h3 class="font-bold text-gray-900 text-lg sm:text-xl">XNAM</p>
+        <!-- Rating -->
+        <div class="flex items-center justify-center sm:justify-start gap-1 pt-1">
+          <div class="flex text-amber-400 text-xs">
+            ★ ★ ★ ★ ★
+          </div>
+          <span class="text-xs font-medium text-gray-500">RID</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price & Actions Container -->
+    <div class="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto pt-4 sm:pt-0 border-t sm:border-t-0 border-gray-100 flex-shrink-0 gap-3">
+      <div class="text-left sm:text-right">
+        <span class="text-2xl font-bold text-gray-900">XVAL</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="p-2 text-gray-400 hover:text-red-500 border border-gray-200 rounded-lg hover:border-red-200 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+        </button>
+        <button
+        hx-post="XYURL" 
+  hx-vals='XData'
+  hx-target="#cart-count"
+  hx-disabled-elt="this"
+  class="px-4 py-2.5 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 active:scale-95 transition shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
+  <span class="htmx-indicator hidden">Adding...</span>
+  <span class="htmx-default">XYID</span>
+        </button>
+      </div>
+    </div>
+    
+  </div>
