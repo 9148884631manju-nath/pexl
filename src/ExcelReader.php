@@ -194,12 +194,13 @@ class ExcelReader{
       $newfile = str_replace($hml,$newatr,$oldfile);
       if(file_put_contents($thm,$newfile))
         {
-          $dar="";
+          $dar="";$dat="";
           for($i=0;$i<count($hml);$i+=1)
             {
-              $dar.='["txt","P'.$newatr[$i].'","'.$newatr[$i].'","'.$hml[$i].'","","",""],<br/>';
+              $dat.='"P'.$newatr[$i].'":"'.$hml[$i].'",';
+              $dar.='["db","P'.$newatr[$i].'","'.$newatr[$i].'","'.$defval[$i].'","","",""],<br/>';
             }
-          $res = "<code>\$null=array(array());<br/>\$html=\$r->htmlint(<br/>\$null,<br/>[<br/>".$dar."],<br/>\"".$thm."\"</br>);echo \$html;</code>";
+          $res = "<code>#JSON Data<br/>\$data='[{".substr($dat,0,-1)."}]';<br/><br/>#Decode JSON Data<br/>\$data=json_decode(\$data);<br/><br/>#JSON Data to HTML Template<br/>\$html=\$r->htmlint(<br/>\$data,<br/>[<br/>".$dar."],<br/>\"".$thm."\"</br>);<br/><br/>#Print HTML Data<br/>echo \$html;</code>";
 
         }
         else{
