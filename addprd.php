@@ -10,8 +10,7 @@ $r = new ExcelReader();
 $ary=array(array());
 $mycart = json_decode(json_encode($ary));
 
-$totheme = $r->htmltotheme("temps/headerwithpara.html");
-echo $totheme;
+
 
 $form=$r->formmodule("prdmodule.json",["name","price","image"],$mycart);
 $html = $r->htmlint($mycart,[
@@ -20,6 +19,6 @@ $html = $r->htmlint($mycart,[
 ],"temps/form.html");
 echo $html;
 
-require_once "temps/headerwithpara.html";
+
 
 ?>

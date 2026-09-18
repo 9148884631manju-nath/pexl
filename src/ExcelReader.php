@@ -190,10 +190,17 @@ class ExcelReader{
       $hml = $this->gettextfromhtml($thm);
       //var_dump($hml);
       $newatr = ["XA","XB","XC","XD","XE","XF","XG","XH","XI","XJ","XK","XL","XM","XN","XO","XP","XQ","XR","XS","XT"];
+      $defval = ["Title 1","Title 2","Title 3","Title 4","Title 5","Title 6","Title 7","Title 8","Title 9","Title 10","Title 11","Title 12","Title 13","Title 14","Title 15","Title 16","Title 17","Title 18","Title 19","Title 20"];
       $newfile = str_replace($hml,$newatr,$oldfile);
       if(file_put_contents($thm,$newfile))
         {
-          $res = "Converted use Variables : ".implode(",", $hml);
+          $dar="";
+          for($i=0;$i<count($hml);$i+=1)
+            {
+              $dar.='["txt","P'.$newatr[$i].'","'.$newatr[$i].'","'.$hml[$i].'","","",""],<br/>';
+            }
+          $res = "<code>\$null=array(array());<br/>\$html=\$r->htmlint(<br/>\$null,<br/>[<br/>".$dar."],<br/>\"".$thm."\"</br>);echo \$html;</code>";
+
         }
         else{
           $res= file_put_contents($thm,$newfile);
