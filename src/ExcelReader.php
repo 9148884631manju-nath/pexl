@@ -1,7 +1,21 @@
 <?php
 namespace Phpxl\Pexl;
 session_start();
+
 use OpenSpout\Reader\XLSX\Reader;
+
+/**
+ * Class Pexl project
+ *
+ * Developing Web Applications using MS Excell worksheets as Database 
+ *
+ * @category  WEBAPP
+ * @package   Phpxl\Pexl
+ * @author    Manjunath K <manju9343945143@gmail.com>
+ * @copyright 2026 Manjunath / coding-infi
+ * @license   https://opensource.org/licenses/MIT MIT License
+ * @link      http://coding-infi.in
+ */
 
 class ExcelReader{
  public function __construct(){
