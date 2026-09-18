@@ -114,7 +114,7 @@ class ExcelReader{
      }else{
       $res=$dv;
      }
-     $res=$px.$res.$sx;
+     $res=$px.$res.$sx; 
    break;
   case "check_prd_in_sescart":
     if(isset($v->$pv)){
@@ -179,6 +179,30 @@ class ExcelReader{
   preg_match_all('/>([^<]+)</', $html, $matches);  
   $resultArray = array_values(array_filter(array_map('trim', $matches[1])));
   return $resultArray;
+ }
+
+ public function htmltotheme($thm){
+  $res="";
+  if(file_exists($thm))
+    {
+      $oldfile=file_get_contents($thm);
+      //echo $oldfile;
+      $hml = $this->gettextfromhtml($thm);
+      //var_dump($hml);
+      $newatr = ["XA","XB","XC","XD","XE","XF","XG","XH","XI","XJ","XK","XL","XM","XN","XO","XP","XQ","XR","XS","XT"];
+      $newfile = str_replace($hml,$newatr,$oldfile);
+      if(file_put_contents($thm,$newfile))
+        {
+          $res = "Converted use Variables : ".implode(",", $hml);
+        }
+        else{
+          $res= file_put_contents($thm,$newfile);
+        }
+    }
+    else{
+      $res=" File Not Found: ".$thm;
+    }
+    return $res;
  }
 
  public function htmlint($data, array $keys, string $theme){
@@ -295,6 +319,54 @@ public function swcpo($data,$mycart,$cid){
   }
   $mycart[$cid][$data[1]]=$vb;
   return $mycart;
+}
+public function formmodule($file,$flds,$mycart){
+  $res="";
+  $rf=file_get_contents($file);
+  $rf=json_decode($rf);
+  $iar=array();
+  foreach($rf as $kk=>$vv)
+    {
+      if(isset($vv->XType)){
+        switch($vv->XType)
+        {
+          case "text":
+            $file = "input";
+            break;
+          case "select":
+            $file = "selecttext";
+            break;
+          case "selectnumber":
+            $file = "selectnumber";
+            break;
+          case "file":
+            $file = "file";
+            break;
+          default:
+            $file="input";
+          break;
+        }
+        $mfile="temps/".$file.".html";
+        if(file_exists($mfile)){}else{$mfile = "temps/input.html";}
+        foreach($vv as $ik=>$iv){
+          $iar[$kk][]=["txt",$ik,$ik,$iv,"","",""];
+        }
+        if(in_array($kk,$flds)){
+          $res.=$this->htmlint($mycart,$iar[$kk],$mfile);
+        }
+      }else{
+        $res.="";
+      }
+    }
+    return $res;
+}
+public function formelement($mycart,$txt,$XForname,$XFor,$name,$XLabel,$title,$XplaceHolder,$placeholder,$XRequired,$required,$temp){
+  return $this->htmlint($mycart,[
+ [$txt,$XFor."name",$XFor,$name,"","",""],
+ [$txt,$XLabel."name",$XLabel,$title,"","",""],
+ [$txt,$XplaceHolder."name",$XplaceHolder,$placeholder,"","",""],
+ [$txt,$XRequired."name",$XRequired,$required,"","",""]
+],$temp);
 }
 public function math($fval,$sval,$ope){ 
   $res=0;

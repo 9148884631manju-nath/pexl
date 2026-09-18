@@ -1,0 +1,57 @@
+{
+ "name":{
+  "XFor":"name",
+  "XLabel":"Enter Name",
+  "XType":"text",
+  "XClass":"name",
+  "XplaceHolder":"Enter Name",
+  "XRequired":"required",
+  "XVal":""
+ },
+ "price":{
+  "XFor":"price",
+  "XLabel":"Enter Price",
+  "XType":"number",
+  "XClass":"price",
+  "XplaceHolder":"Enter Price",
+  "XRequired":"required",
+  "XVal":""
+ },
+ "category":{
+  "XFor":"category",
+  "XLabel":"Select Category",
+  "XType":"select",
+  "XOptions":"categories|id|name",
+  "XClass":"category",
+  "XplaceHolder":"Enter category",
+  "XRequired":"required",
+  "XVal":""
+ },
+ "description":{
+  "XFor":"description",
+  "XLabel":"Description",
+  "XType":"textarea",
+  "XClass":"description",
+  "XplaceHolder":"Description",
+  "XRequired":"required",
+  "XVal":""
+ },
+ "image":{
+  "XFor":"image",
+  "XLabel":"Upload Product Image",
+  "XType":"file",
+  "XClass":"image",
+  "XplaceHolder":"Upload Image",
+  "XRequired":"required",
+  "XVal":""
+ },
+ "featured":{
+  "XFor":"featured",
+  "XLabel":"Select Featured Product",
+  "XType":"select",
+  "XClass":"featured",
+  "XplaceHolder":"Featured Product",
+  "XRequired":"required",
+  "XVal":""
+ }
+}

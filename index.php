@@ -2,12 +2,12 @@
 require_once __DIR__ . '/openspout/vendor/autoload.php';
 require_once __DIR__ . '/vendor/autoload.php';
 use Phpxl\Pexl\ExcelReader;
-
-require_once "inc/glob.php";
-
 $file="data/data.xlsx";
 $sheet="Sheet1";
 $r = new ExcelReader();
+
+
+require_once "inc/glob.php";
 
 
 
