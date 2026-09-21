@@ -18,8 +18,8 @@ $html_content = $_POST['html_content'];
 if(file_put_contents($template_name,$html_content)){
 $totheme = $r->htmltotheme($template_name); 
 if(file_put_contents($theme_name,"<?php \n ".$totheme." \n ?>")){
- printf($totheme);
- require_once $theme_name;
+ echo "Template Generated : ".$theme_name;
+ //require_once $theme_name;
 }else{
 
 }

@@ -211,10 +211,10 @@ class ExcelReader{
           $dar="";$dat="";
           for($i=0;$i<count($hml);$i+=1)
             {
-              $dat.='"P'.$newatr[$i].'":"'.$hml[$i].'",';
+              $dat.="\t" . "\t". "\n". '    "P'.$newatr[$i].'":"'.$hml[$i].'",';
               $dar.="\t". '["db","P'.$newatr[$i].'","'.$newatr[$i].'","'.$defval[$i].'","","",""],' . "\n";
             }
-          $res = " /* JSON Data */ \n \$data='[{".substr($dat,0,-1)."}]'; \n\n /* Decode JSON Data */ \n \$data=json_decode(\$data); \n\n /* JSON Data to HTML Template */ \n \$html=\$r->htmlint( \n \$data, \n [\n".$dar." ], \n \"".$thm."\" \n ); \n\n /* Print HTML Data */ \n echo \$html;";
+          $res = " /* JSON Data */ \n \$data='[ \n \t {".substr($dat,0,-1)." \n \t } \n ]'; \n\n /* Decode JSON Data */ \n \$data=json_decode(\$data); \n\n /* JSON Data to HTML Template */ \n \$html=\$r->htmlint( \n \$data, \n [\n".$dar." ], \n \"".$thm."\" \n ); \n\n /* Print HTML Data */ \n echo \$html;";
 
         }
         else{
