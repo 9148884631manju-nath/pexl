@@ -212,9 +212,9 @@ class ExcelReader{
           for($i=0;$i<count($hml);$i+=1)
             {
               $dat.='"P'.$newatr[$i].'":"'.$hml[$i].'",';
-              $dar.='["db","P'.$newatr[$i].'","'.$newatr[$i].'","'.$defval[$i].'","","",""],<br/>';
+              $dar.='["db","P'.$newatr[$i].'","'.$newatr[$i].'","'.$defval[$i].'","","",""],' . "\n";
             }
-          $res = "<code>#JSON Data<br/>\$data='[{".substr($dat,0,-1)."}]';<br/><br/>#Decode JSON Data<br/>\$data=json_decode(\$data);<br/><br/>#JSON Data to HTML Template<br/>\$html=\$r->htmlint(<br/>\$data,<br/>[<br/>".$dar."],<br/>\"".$thm."\"</br>);<br/><br/>#Print HTML Data<br/>echo \$html;</code>";
+          $res = " #JSON Data \n \$data='[{".substr($dat,0,-1)."}]'; \n\n #Decode JSON Data \n \$data=json_decode(\$data); \n\n #JSON Data to HTML Template \n \$html=\$r->htmlint( \n \$data, \n [\n".$dar."], \n \"".$thm."\" \n ); \n\n #Print HTML Data \n echo \$html;";
 
         }
         else{

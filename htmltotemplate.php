@@ -20,7 +20,7 @@ $r = new ExcelReader();
       <h1 class="text-xl font-medium text-amber-800/80">HTML to Template Generator</h1>
       
       <form 
-        hx-post="/generate" 
+        hx-post="generate.php" 
         hx-target="#result-container" 
         hx-swap="innerHTML" 
         class="space-y-6"
