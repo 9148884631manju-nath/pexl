@@ -204,11 +204,11 @@ class ExcelReader{
       //echo $oldfile;
       $hml = $this->gettextfromhtml($thm);
       //var_dump($hml);
-      $newatr = ["XA","XB","XC","XD","XE","XF","XG","XH","XI","XJ","XK","XL","XM","XN","XO","XP","XQ","XR","XS","XT"];
+      $newatr = ["XA","XB","XC","XD","XE","XF","XG","XH","XI","XJ","XK","XL","XM","XN","XO","XP","XQ","XR","XS","XT","XAA","XBA","XCA","XDA","XEA","XFA","XGA","XHA","XIA","XJA","XKA","XLA","XMA","XNA","XOA","XPA","XQA","XRA","XSA","XTA"];
       $defval = ["Title 1","Title 2","Title 3","Title 4","Title 5","Title 6","Title 7","Title 8","Title 9","Title 10","Title 11","Title 12","Title 13","Title 14","Title 15","Title 16","Title 17","Title 18","Title 19","Title 20"];
       ?>
-      <input class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" name="template_name" value="<?=$thm?>" $placeholder="theme" />
-          <input class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" name="theme_name" value="<?=$tem?>" $placeholder="theme" />
+      <input class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" type="hidden" name="template_name" value="<?=$thm?>" $placeholder="theme" />
+          <input type="hidden" class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" name="theme_name" value="<?=$tem?>" $placeholder="theme" />
       <?php
       for($i=0;$i<count($hml);$i+=1)
         {
