@@ -195,7 +195,8 @@ class ExcelReader{
   return $resultArray;
  }
 
- public function htmltotheme($thm){
+
+ public function htmltoattributes($thm,$tem){
   $res="";
   if(file_exists($thm))
     {
@@ -205,13 +206,44 @@ class ExcelReader{
       //var_dump($hml);
       $newatr = ["XA","XB","XC","XD","XE","XF","XG","XH","XI","XJ","XK","XL","XM","XN","XO","XP","XQ","XR","XS","XT"];
       $defval = ["Title 1","Title 2","Title 3","Title 4","Title 5","Title 6","Title 7","Title 8","Title 9","Title 10","Title 11","Title 12","Title 13","Title 14","Title 15","Title 16","Title 17","Title 18","Title 19","Title 20"];
+      ?>
+      <input class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" name="template_name" value="<?=$thm?>" $placeholder="theme" />
+          <input class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" name="theme_name" value="<?=$tem?>" $placeholder="theme" />
+      <?php
+      for($i=0;$i<count($hml);$i+=1)
+        {
+          ?>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div><b>Label </b><input class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" name="label[]" value="<?=$newatr[$i]?>" $placeholder="label" /></div>
+            <div><b>Value</b><input class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" name="value[]" value="<?=$hml[$i]?>" $placeholder="value" /></div>
+          </div>
+          <?php
+        }      
+    }
+    else{
+      echo " File Not Found: ".$thm;
+    }
+ }
+
+ public function htmltotheme($thm,$newatr,$defval){
+  $res="";
+  if(file_exists($thm))
+    {
+      $oldfile=file_get_contents($thm);
+      //echo $oldfile;
+      $hml = $this->gettextfromhtml($thm);
+      //var_dump($hml);
+      //$newatr = ["XA","XB","XC","XD","XE","XF","XG","XH","XI","XJ","XK","XL","XM","XN","XO","XP","XQ","XR","XS","XT"];
+      //$defval = ["Title 1","Title 2","Title 3","Title 4","Title 5","Title 6","Title 7","Title 8","Title 9","Title 10","Title 11","Title 12","Title 13","Title 14","Title 15","Title 16","Title 17","Title 18","Title 19","Title 20"];
+      
       $newfile = str_replace($hml,$newatr,$oldfile);
       if(file_put_contents($thm,$newfile))
         {
           $dar="";$dat="";
-          for($i=0;$i<count($hml);$i+=1)
+          for($i=0;$i<count($newatr);$i+=1)
             {
-              $dat.="\t" . "\t". "\n". '    "P'.$newatr[$i].'":"'.$hml[$i].'",';
+              $dat.="\t" . "\t". "\n". '    "P'.$newatr[$i].'":"'.$defval[$i].'",';
               $dar.="\t". '["db","P'.$newatr[$i].'","'.$newatr[$i].'","'.$defval[$i].'","","",""],' . "\n";
             }
           $res = " /* JSON Data */ \n \$data='[ \n \t {".substr($dat,0,-1)." \n \t } \n ]'; \n\n /* Decode JSON Data */ \n \$data=json_decode(\$data); \n\n /* JSON Data to HTML Template */ \n \$html=\$r->htmlint( \n \$data, \n [\n".$dar." ], \n \"".$thm."\" \n ); \n\n /* Print HTML Data */ \n echo \$html;";

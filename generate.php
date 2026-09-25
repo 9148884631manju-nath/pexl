@@ -9,22 +9,53 @@ $r = new ExcelReader();
 
 //var_dump($_POST);
 
-$temp= "templates/";
-$them= "themes/";
 
-$template_name = $temp.$_POST['template_name'].".html";
-$theme_name = $them.$_POST['template_name'].".php";
-$html_content = $_POST['html_content'];
-if(file_put_contents($template_name,$html_content)){
-$totheme = $r->htmltotheme($template_name); 
-if(file_put_contents($theme_name,"<?php \n ".$totheme." \n ?>")){
- echo "Template Generated : ".$theme_name;
- //require_once $theme_name;
-}else{
+switch($_REQUEST['for'])
+{
+ case "attr":
+    $temp= "templates/";
+    $them= "themes/";
 
+    $template_name = $temp.$_POST['template_name'].".html";
+    $theme_name = $them.$_POST['template_name'].".php";
+    $html_content = $_POST['html_content'];
+
+    if(file_put_contents($template_name,$html_content)){
+    $totheme = $r->htmltoattributes($template_name,$theme_name);
+
+    echo $totheme;
+    }
+    else{
+    echo "Error Writing template and Reading";
+    }
+  break;
+  case "theme":
+    $attr = $_POST['label'];
+    $vals = $_POST['value'];
+    $template_name = $_POST['template_name'];
+    $theme_name = $_POST['theme_name'];
+    $html_content = file_get_contents($template_name);
+   //var_dump($attr);
+   //var_dump($vals);
+    
+    if(file_put_contents($template_name,$html_content)){
+     $totheme = $r->htmltotheme($template_name,$attr,$vals); 
+     if(file_put_contents($theme_name,"<?php \n ".$totheme." \n ?>")){
+      echo "Template Generated : ".$theme_name."<br/><br/><br/>";
+        require_once $theme_name;
+       }else{
+
+       }
+    }
+    else{
+    echo "Error Writing template and Reading";
+    }
+    
+   break;
+ default:
+ break;
 }
-}
-else{
-echo "Error Writing template and Reading";
-}
+
+
+
 ?>
