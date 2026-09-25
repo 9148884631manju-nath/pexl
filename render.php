@@ -93,8 +93,8 @@ $r = new ExcelReader();
 
   <header class="bg-white border-b border-coolSlate-200 px-6 py-3.5 flex items-center justify-between shrink-0 shadow-sm z-10">
     <div class="flex items-center space-x-3.5">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandBlue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-brandBlue-500/20">
-        <i class="fa-solid fa-code"></i>
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandBlue-600 to-indigo-600  flex items-center justify-center font-bold text-lg shadow-md shadow-brandBlue-500/20">
+        PEXL
       </div>
       <div>
         <h1 class="font-bold text-coolSlate-900 text-base leading-tight flex items-center gap-2">
@@ -106,7 +106,7 @@ $r = new ExcelReader();
     </div>
 
     <!-- Header Actions -->
-    <div class="flex items-center space-x-2.5 text-xs">
+    <div class="flex items-center space-x-2.5 text-xs hidden">
       <button 
         onclick="loadSampleHTML()"
         class="bg-coolSlate-100 hover:bg-coolSlate-200 text-coolSlate-700 font-medium px-3.5 py-2 rounded-lg border border-coolSlate-200 transition flex items-center gap-1.5 shadow-sm">
@@ -120,8 +120,8 @@ $r = new ExcelReader();
     </div>
   </header>
 
-  <main class="flex-1 p-4 lg:p-6 overflow-hidden">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 h-full max-w-[1920px] mx-auto">
+  <main class="flex-1 p-4 lg:p-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 h-full">
       
       <!-- ========================================== -->
       <!-- COLUMN 1: Input Panel (HTML & Metadata)    -->
@@ -221,7 +221,7 @@ $r = new ExcelReader();
         hx-swap="innerHTML" >
           <div 
             id="result-container" 
-            class="flex-1 overflow-y-auto space-y-3 pr-1">
+            class="flex-1 min-h-0 overflow-y-auto space-y-3 pr-1">
             
             <!-- Default Sample Attribute Card -->          
 
@@ -304,9 +304,7 @@ $r = new ExcelReader();
         <!-- Editor Workspace Code Output Pane -->
         <div id="result-container_tmp" class="flex-1 p-4 relative font-mono text-xs overflow-auto bg-coolSlate-950 ">
           <div class="flex space-x-4 h-full">
-            <div class="select-none text-coolSlate-600 text-right pr-2 border-r border-coolSlate-800 font-mono text-xs leading-relaxed" id="line-numbers">
-              1<br>2<br>3<br>4<br>5
-            </div>
+            
             <pre class="flex-1 text-coolSlate-200 whitespace-pre-wrap leading-relaxed overflow-x-auto"><code id="result-output" class="text-blue-200">// Result will appear here...
 // Paste raw HTML in Column 1 and click "Generate Template" to compile.</code></pre>
           </div>
