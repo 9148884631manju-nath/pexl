@@ -41,7 +41,7 @@ switch($_REQUEST['for'])
     if(file_put_contents($template_name,$html_content)){
      $totheme = $r->htmltotheme($template_name,$attr,$vals); 
      if(file_put_contents($theme_name,"<?php \n ".$totheme." \n ?>")){
-      echo "Template Generated : ".$theme_name."<br/><br/><br/>";
+      echo "Template Generated : <a href='viewtheme.php?theme=".$theme_name."' target='_blank'>".$theme_name."</a><br/><br/><br/>";
         require_once $theme_name;
        }else{
 
