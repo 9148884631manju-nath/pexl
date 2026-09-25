@@ -13,7 +13,7 @@ $r = new ExcelReader();
 
 
 ?>
-<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+<div class=" mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
     
     <!-- LEFT COLUMN: INPUT FORM -->
     <div class="space-y-6">
@@ -67,7 +67,7 @@ $r = new ExcelReader();
     <form hx-post="generate.php?for=theme" 
         hx-target="#result-container_tmp" 
         hx-swap="innerHTML" 
-        class="space-y-6"  >
+        class="space-y-6 w-3xl"  >
         <h1 class="text-xl font-medium text-amber-800/80">Set Attributes to Template</h1>
         <div id="result-container"></div>
 
