@@ -48,6 +48,32 @@ class ExcelReader{
   $res = $writer->save($filePath);
   return $res;
  }
+ 
+ public function psData(string $filePath,string $sheetName){
+  $res = array();
+  $spreadsheet = IOFactory::load($filePath);
+  $res = $spreadsheet->getSheetByName($sheetName)->toArray();
+  return $res;
+ }
+ public function psDataToJson(array $data){
+    $res=array();
+    $x=0;
+    for($i=1;$i<count($data);$i+=1){
+        for($j=0;$j<count($data[$i]);$j+=1)
+          {
+            $res[$x][$data[0][$j]] = $data[$i][$j];
+          }
+      $x+=1;
+    }
+    return $res;
+ }
+
+ public function psGetDatatoJson(string $filePath,string $sheetName){
+  $psData = $this->psData($filePath,$sheetName);
+  $psDataToJson  = $this->psDataToJson($psData);
+  return json_decode(json_encode($psDataToJson));
+ }
+
  public function streamFile(string $filepath){
   $reader = new Reader();
   $reader->open($filepath);
@@ -267,7 +293,7 @@ class ExcelReader{
     }
  }
 
- public function htmltotheme($thm,$newatr,$defval){
+ public function htmltotheme($bname,$thm,$newatr,$defval){
   $res="";
   if(file_exists($thm))
     {
@@ -284,10 +310,10 @@ class ExcelReader{
           $dar="";$dat="";
           for($i=0;$i<count($newatr);$i+=1)
             {
-              $dat.="\t" . "\t". "\n". '    "P'.$newatr[$i].'":"'.$defval[$i].'",';
-              $dar.="\t". '["db","P'.$newatr[$i].'","'.$newatr[$i].'","'.$defval[$i].'","","",""],' . "\n";
+              $dat.="\t" . "\t". "\n". '    "'.$newatr[$i].'":"'.$defval[$i].'",';
+              $dar.="\t". '["db","'.$newatr[$i].'","'.$newatr[$i].'","'.$defval[$i].'","","",""],' . "\n";
             }
-          $res = " /* JSON Data */ \n \$data='[ \n \t {".substr($dat,0,-1)." \n \t } \n ]'; \n\n /* Decode JSON Data */ \n \$data=json_decode(\$data); \n\n /* JSON Data to HTML Template */ \n \$html=\$r->htmlint( \n \$data, \n [\n".$dar." ], \n \"".$thm."\" \n ); \n\n /* Print HTML Data */ \n echo \$html;";
+          $res = " /* JSON Data */ \n \$filePath=\"data/data.xlsx\"; \n	\$sheetName=\"".$bname."\";	\$data = \$r->psGetDatatoJson(\$filePath,\$sheetName); \n\n /* JSON Data to HTML Template */ \n \$html=\$r->htmlint( \n \$data, \n [\n".$dar." ], \n \"".$thm."\" \n ); \n\n /* Print HTML Data */ \n echo \$html;";
 
         }
         else{

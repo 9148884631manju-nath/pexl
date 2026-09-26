@@ -40,7 +40,7 @@ switch($_REQUEST['for'])
    //var_dump($vals);
     
     if(file_put_contents($template_name,$html_content)){
-     $totheme = $r->htmltotheme($template_name,$attr,$vals); 
+     $totheme = $r->htmltotheme($sheeetName,$template_name,$attr,$vals); 
      if(file_put_contents($theme_name,"<?php \n ".$totheme." \n ?>")){
       
       echo "Template Generated : <a href='viewtheme.php?theme=".$theme_name."' target='_blank'>".$theme_name."</a><br/><br/><br/>";
