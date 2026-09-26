@@ -2,7 +2,11 @@
 namespace Phpxl\Pexl;
 session_start();
 
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 use OpenSpout\Reader\XLSX\Reader;
+use OpenSpout\Common\Entity\Row;
+use OpenSpout\Writer\XLSX\Writer;
 
 /**
  * Class Pexl project
@@ -20,6 +24,29 @@ use OpenSpout\Reader\XLSX\Reader;
 class ExcelReader{
  public function __construct(){
 
+ }
+ public function createExcelFile(string $filePath,string $sheeetName,array $flds,array $vals){
+  
+  // 1. Load the existing file into memory
+  $spreadsheet = IOFactory::load($filePath);
+
+  // 2. Add a new sheet
+  $newSheet = $spreadsheet->createSheet();
+  $newSheet->setTitle($sheeetName);
+
+  // 3. Add data directly to the new sheet
+  $newSheet->fromArray(
+      [
+          $flds,
+          $vals
+      ],
+      null,
+      'A1'
+  );
+  // 4. Save the updated file back to disk
+  $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+  $res = $writer->save($filePath);
+  return $res;
  }
  public function streamFile(string $filepath){
   $reader = new Reader();
@@ -104,6 +131,19 @@ class ExcelReader{
      
      $res = str_replace($v,$mv,$thm);
     return $res;
+ }
+
+ public function createExlSheetWithData(string $filepath,string $sheetName,array $flds,array $vals){
+  $res="";
+  $writer = new Writer();
+  $writer->openToFile($filepath);
+  $sheet2 = $writer->addNewSheetAndMakeItCurrent();
+  $sheet2->setName('DataNew');
+
+  $writer->addRow(Row::fromValues($flds));
+  $writer->close();
+  $res="Done";
+  return $res;
  }
 
  public function filterdata($v,$tv,$pv,$dv,$ev,$px,$sx){
@@ -196,7 +236,7 @@ class ExcelReader{
  }
 
 
- public function htmltoattributes($thm,$tem){
+ public function htmltoattributes($bname,$thm,$tem){
   $res="";
   if(file_exists($thm))
     {
@@ -207,6 +247,7 @@ class ExcelReader{
       $newatr = ["XA","XB","XC","XD","XE","XF","XG","XH","XI","XJ","XK","XL","XM","XN","XO","XP","XQ","XR","XS","XT","XAA","XBA","XCA","XDA","XEA","XFA","XGA","XHA","XIA","XJA","XKA","XLA","XMA","XNA","XOA","XPA","XQA","XRA","XSA","XTA"];
       $defval = ["Title 1","Title 2","Title 3","Title 4","Title 5","Title 6","Title 7","Title 8","Title 9","Title 10","Title 11","Title 12","Title 13","Title 14","Title 15","Title 16","Title 17","Title 18","Title 19","Title 20"];
       ?>
+      <input class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" type="hidden" name="basename" value="<?=$bname?>" $placeholder="theme" />
       <input class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" type="hidden" name="template_name" value="<?=$thm?>" $placeholder="theme" />
           <input type="hidden" class="w-full border border-amber-700/60 rounded-none px-3 py-2 text-stone-800 placeholder-amber-700/50 focus:outline-none focus:ring-1 focus:ring-amber-800" name="theme_name" value="<?=$tem?>" $placeholder="theme" />
       <?php

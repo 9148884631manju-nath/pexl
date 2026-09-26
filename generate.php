@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/openspout/vendor/autoload.php';
+
 require_once __DIR__ . '/vendor/autoload.php';
 use Phpxl\Pexl\ExcelReader;
  
@@ -21,7 +21,7 @@ switch($_REQUEST['for'])
     $html_content = $_POST['html_content'];
 
     if(file_put_contents($template_name,$html_content)){
-    $totheme = $r->htmltoattributes($template_name,$theme_name);
+    $totheme = $r->htmltoattributes($_POST['template_name'],$template_name,$theme_name);
 
     echo $totheme;
     }
@@ -30,6 +30,7 @@ switch($_REQUEST['for'])
     }
   break;
   case "theme":
+    $sheeetName = $_POST['basename'];
     $attr = $_POST['label'];
     $vals = $_POST['value'];
     $template_name = $_POST['template_name'];
@@ -43,6 +44,8 @@ switch($_REQUEST['for'])
      if(file_put_contents($theme_name,"<?php \n ".$totheme." \n ?>")){
       
       echo "Template Generated : <a href='viewtheme.php?theme=".$theme_name."' target='_blank'>".$theme_name."</a><br/><br/><br/>";
+      $filePath="data/data.xlsx"; 
+      echo $r->createExcelFile($filePath,$sheeetName,$attr,$vals);
         require_once $theme_name;
        }else{
 

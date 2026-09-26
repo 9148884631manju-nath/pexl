@@ -1,5 +1,4 @@
 <?php 
-require_once __DIR__ . '/openspout/vendor/autoload.php';
 require_once __DIR__ . '/vendor/autoload.php';
 use Phpxl\Pexl\ExcelReader;
 $file="data/data.xlsx";
